@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class GroceryCalculator{
 
-    static void grocCalc(){
+    public void grocCalc(){
         //Variables
         int i;
         Double groceryCost, stateTax = .06, subTotal = 0.00, grandTotal = 0.00;

@@ -11,16 +11,22 @@ import java.util.Scanner;
  */
 public class Menu {
     // Array to store commands
-    static ArrayList<String> commandsArray = new ArrayList<>();
-    static String fileName = "commandLog.txt";
+    ArrayList<String> commandsArray = new ArrayList<>();
+    String fileName = "commandLog.txt";
 
-    static void  menuOptions(){
+    public void  menuOptions(){
 
-        // VARIABLES
+        // Variables
         boolean calc = true;
         int menuOption;
 
-        //Scanner
+        //Access methods from other classes
+        Calculator accessCalc = new Calculator();
+        TipCalculator accessTipCalc = new TipCalculator();
+        GroceryCalculator accessGrocCalc = new GroceryCalculator();
+        Help accessHelp = new Help();
+
+        //Scanner for menu input
         Scanner menu = new Scanner(System.in);
 
         while(calc) {
@@ -36,15 +42,16 @@ public class Menu {
             menuOption = menu.nextInt();
             commandsArray.add(String.valueOf(menuOption));
 
+            //Switch to redirect user
             switch (menuOption){
 
-                case (1): Calculator.calc();
+                case (1): accessCalc.calc();
                     break;
-                case (2): TipCalculator.tipCalc();
+                case (2): accessTipCalc.tipCalc();
                     break;
-                case (3): GroceryCalculator.grocCalc();
+                case (3): accessGrocCalc.grocCalc();
                     break;
-                case (4): Help.help();
+                case (4): accessHelp.help();
                     break;
                 case (5): commandLog();
                     break;
@@ -59,7 +66,7 @@ public class Menu {
 
     }
 
-    public static void commandLog(){
+    public void commandLog(){
         //Variables
         int i;
 
@@ -76,7 +83,7 @@ public class Menu {
         }
     }
 
-    public static void clearCommandLog() {
+    public void clearCommandLog() {
         try {
             commandsArray.clear();
 

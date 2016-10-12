@@ -9,7 +9,7 @@ import java.util.Scanner;
  */
 public class TipCalculator {
 
-    static void tipCalc(){
+    public void tipCalc(){
 
         //Variables
         int i;

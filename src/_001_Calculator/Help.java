@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class Help{
 
-        static void help(){
+        public void help(){
 
             // Variables
             boolean helpMe = true;

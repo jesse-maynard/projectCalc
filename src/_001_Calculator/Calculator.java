@@ -4,18 +4,15 @@ package _001_Calculator;
  * Created by jessemaynard on 10/10/16.
  */
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Calculator{
 
-    static ArrayList<Integer> numsArray = new ArrayList<>();
+    ArrayList<Integer> numsArray = new ArrayList<>();
 
-    public static void calc() {
+    public void calc() {
 
         char yesNo, oper;
 
@@ -51,7 +48,7 @@ public class Calculator{
         }
     }
 
-    static void addition(ArrayList<Integer> numsArray){
+    public void addition(ArrayList<Integer> numsArray){
 
         //Variables
         boolean addTrue = true;
@@ -113,7 +110,7 @@ public class Calculator{
         } catch(InputMismatchException im){System.out.println("And that sir and or madam, is not a number. Do it again.");}
     }
 
-    static void subtraction(ArrayList<Integer> numsArray){
+    public void subtraction(ArrayList<Integer> numsArray){
         //Variables
         int num, sum = 0, i;
         char yesNo2;
@@ -171,7 +168,7 @@ public class Calculator{
         } catch(InputMismatchException im){System.out.println("And that sir and or madam, is not a number. Do it again.");}
     }
 
-    static void multiplication(ArrayList<Integer> numsArray){
+    public void multiplication(ArrayList<Integer> numsArray){
         //Variables
         int num, sum = 1, i;
         char yesNo2;
@@ -228,7 +225,7 @@ public class Calculator{
         } catch(InputMismatchException im){System.out.println("And that sir and or madam, is not a number. Do it again.");}
     }
 
-    static void division(ArrayList<Integer> numsArray){
+    public void division(ArrayList<Integer> numsArray){
         //Variables
         int num, i;
         char yesNo2;

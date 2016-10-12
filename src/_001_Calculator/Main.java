@@ -7,7 +7,9 @@ public class Main {
 
     public static void main(String[] args){
 
-        Menu.menuOptions();
+       //Variable to allow access to non-static methods from main
+       Menu accessMenu = new Menu();
+        accessMenu.menuOptions();
 
     }
 
