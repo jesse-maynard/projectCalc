@@ -4,93 +4,288 @@ package _001_Calculator;
  * Created by jessemaynard on 10/10/16.
  */
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Calculator{
 
-    static  String fileName = "commandLog.txt";
     static ArrayList<Integer> numsArray = new ArrayList<>();
-    static ArrayList<Double> tipsArray = new ArrayList<>();
-    static ArrayList<String> commandsArray = new ArrayList<>();
-    static ArrayList<Double> grocArray = new ArrayList<>();
 
-    public static void main(String[] args) {
-
+    public static void calc() {
 
         char yesNo, oper;
-        boolean calc = true;
-        int menuOption, i;
-
-
-
 
         Scanner menu = new Scanner(System.in);
 
-        while(calc) {
-            System.out.println("Welcome to the menu. Please select an option: ");
-            System.out.println("1. Calculator");
-            System.out.println("2. Tip Calculator");
-            System.out.println("3. Grocery Calculator");
-            System.out.println("4. Help!");
-            System.out.println("5. Command Log");
-            System.out.println("6. Clear Command Log");
-            System.out.println("7. Quit!");
+        System.out.println("Welcome to the Calculator of DOOM!");
 
-            menuOption = menu.nextInt();
-            commandsArray.add(String.valueOf(menuOption));
+        System.out.println("Please select the type of Operation you would like to perform: ");
+        System.out.print("+ ");
+        System.out.print("- ");
+        System.out.print("* ");
+        System.out.println("/");
 
-            if (menuOption == 1) {
-                System.out.println("Welcome to the Calculator of DOOM!");
-                Scanner operInput = new Scanner(System.in);
+        oper = menu.next().charAt(0);
+        System.out.println("You have selected " + oper + "." + "\n" + "Is that correct?");
 
+        System.out.println("y / n");
+        yesNo = menu.next().charAt(0);
 
-                System.out.println("Please select the type of Operation you would like to perform: ");
-                System.out.print("+ ");
-                System.out.print("- ");
-                System.out.print("* ");
-                System.out.println("/");
-
-                oper = operInput.next().charAt(0);
-                commandsArray.add(String.valueOf(oper));
-                System.out.println("You have selected " + oper + "." + "\n"
-                        + "Is that correct?");
-
-                System.out.println("y / n");
-                yesNo = operInput.next().charAt(0);
-
-                if (yesNo == 'y' && oper == '+')
-                    new Addition();
-                if (yesNo == 'y' && oper == '-')
-                    new Subtraction();
-                if (yesNo == 'y' && oper == '*')
-                    new Multiplication();
-                if (yesNo == 'y' && oper == '/')
-                    new Division();
-                if (yesNo == 'n')
-                    System.out.print("Oopsy Daisy");
-
+        if (yesNo == 'y'){
+            switch (oper){
+                case ('+'): addition(numsArray);
+                    break;
+                case ('-'): subtraction(numsArray);
+                    break;
+                case ('*'): multiplication(numsArray);
+                    break;
+                case ('/'): division(numsArray);
+                    break;
             }
-            if (menuOption == 2) {
-                new TipCalculator();
-            }
-            if (menuOption == 3) {
-            }
-            if (menuOption == 4) {
-                new Help();
-            }
-            if (menuOption == 5) {
-                new CommandLog();
-            }
-            if (menuOption == 6) {
-                commandsArray.clear();
-                new ClearCommandLine();
-            }
-            if (menuOption == 7) {
-                System.exit(0);
-            }
+        } else {
+            System.out.println("Oopsy Daisy");
         }
+    }
+
+    static void addition(ArrayList<Integer> numsArray){
+
+        //Variables
+        boolean addTrue = true;
+        int num, sum = 0, i;
+        char yesNo2;
+
+        //Scanner
+        Scanner numInput = new Scanner(System.in);
+
+        try {
+            while (addTrue) {
+
+                boolean moreNums = true;
+
+                System.out.println("Alrighty then, let's do some addition.");
+                System.out.println("Please enter your first number: ");
+                num = numInput.nextInt();
+                numsArray.add(num);
+
+                System.out.println("Superb, you need at least one more number though: ");
+                num = numInput.nextInt();
+                numsArray.add(num);
+
+                while (moreNums) {
+
+                    System.out.println("Excellent, do you want to add another number?");
+                    System.out.println("y / n");
+                    yesNo2 = numInput.next().charAt(0);
+
+                    if (yesNo2 == 'y') {
+
+                        System.out.println("Neat, what is the next number: ");
+
+                        num = numInput.nextInt();
+                        numsArray.add(num);
+
+                    } else if (yesNo2 == 'n') {
+                        moreNums = false;
+                        for (i = 0; i < numsArray.size(); ++i) {
+                            sum += numsArray.get(i);
+                        }
+
+                        System.out.println(sum + " is your answer :D");
+                        System.out.println("Want to do some MORE addition?");
+                        System.out.println("y / n");
+                        yesNo2 = numInput.next().charAt(0);
+
+                        if (yesNo2 == 'y') {
+                            numsArray.clear();
+                            sum = 0;
+                        } else if (yesNo2 == 'n') {
+                            addTrue = false;
+                            numsArray.clear();
+                            sum = 0;
+                        }
+                    }
+                }
+            }
+        } catch(InputMismatchException im){System.out.println("And that sir and or madam, is not a number. Do it again.");}
+    }
+
+    static void subtraction(ArrayList<Integer> numsArray){
+        //Variables
+        int num, sum = 0, i;
+        char yesNo2;
+        boolean subTrue = true;
+        //Scanner
+        Scanner numInput = new Scanner(System.in);
+
+        try {
+            while (subTrue) {
+                boolean moreNums = true;
+
+                System.out.println("Alrighty then, let's do some subtraction.");
+                System.out.println("Please enter your first number: ");
+                num = numInput.nextInt();
+                numsArray.add(num);
+
+                System.out.println("Superb, you need at least one more number though: ");
+                num = numInput.nextInt();
+                numsArray.add(num * -1);
+
+                while (moreNums) {
+                    System.out.println("Excellent, do you want to add another number?");
+                    System.out.println("y / n");
+                    yesNo2 = numInput.next().charAt(0);
+
+                    if (yesNo2 == 'y') {
+                        System.out.println("Neat, what is the next number: ");
+                        num = numInput.nextInt();
+                        numsArray.add(num * -1);
+                    } else if (yesNo2 == 'n') {
+
+                        moreNums = false;
+
+                        for (i = 0; i < numsArray.size(); ++i) {
+                            sum += numsArray.get(i);
+                        }
+
+                        System.out.println(sum + " is your answer :D");
+
+                        System.out.println("Wanna subtract some more numbers?");
+                        System.out.println("y/n");
+                        yesNo2 = numInput.next().charAt(0);
+
+                        if (yesNo2 == 'y') {
+                            numsArray.clear();
+                            sum = 0;
+                        } else if (yesNo2 == 'n') {
+                            subTrue = false;
+                            numsArray.clear();
+                            sum = 0;
+                        }
+                    }
+                }
+            }
+        } catch(InputMismatchException im){System.out.println("And that sir and or madam, is not a number. Do it again.");}
+    }
+
+    static void multiplication(ArrayList<Integer> numsArray){
+        //Variables
+        int num, sum = 1, i;
+        char yesNo2;
+        boolean multTrue = true;
+        //Scanner
+        Scanner numInput = new Scanner(System.in);
+
+        try {
+            while (multTrue) {
+                boolean moreNums = true;
+
+                System.out.println("Alrighty then, let's do some multiplication.");
+                System.out.println("Please enter your first number: ");
+                num = numInput.nextInt();
+                numsArray.add(num);
+
+                System.out.println("Superb, you need at least one more number though: ");
+                num = numInput.nextInt();
+                numsArray.add(num);
+
+                while (moreNums) {
+                    System.out.println("Excellent, do you want to add another number?");
+                    System.out.println("y / n");
+                    yesNo2 = numInput.next().charAt(0);
+
+                    if (yesNo2 == 'y') {
+                        System.out.println("Neat, what is the next number: ");
+                        num = numInput.nextInt();
+                        numsArray.add(num);
+                    } else if (yesNo2 == 'n') {
+                        moreNums = false;
+
+                        for (i = 0; i < numsArray.size(); ++i) {
+                            sum *= numsArray.get(i);
+                        }
+
+                        System.out.println(sum + " is your answer :D");
+
+                        System.out.println("Would you like to get another product?");
+                        System.out.println("y/n");
+                        yesNo2 = numInput.next().charAt(0);
+
+                        if (yesNo2 == 'y') {
+                            numsArray.clear();
+                            sum = 0;
+                        } else if (yesNo2 == 'n') {
+                            numsArray.clear();
+                            multTrue = false;
+                            sum = 0;
+                        }
+                    }
+                }
+            }
+        } catch(InputMismatchException im){System.out.println("And that sir and or madam, is not a number. Do it again.");}
+    }
+
+    static void division(ArrayList<Integer> numsArray){
+        //Variables
+        int num, i;
+        char yesNo2;
+        boolean divTrue = true;
+        //Scanner
+        Scanner numInput = new Scanner(System.in);
+
+        try {
+            while (divTrue) {
+                boolean moreNums = true;
+
+                System.out.println("Alrighty then, let's do some division.");
+                System.out.println("Please enter your first number: ");
+                num = numInput.nextInt();
+                numsArray.add(num);
+
+                double sum = numsArray.get(0);
+
+                System.out.println("Superb, you need at least one more number though: ");
+                num = numInput.nextInt();
+                numsArray.add(num);
+
+                while (moreNums) {
+                    System.out.println("Excellent, do you want to add another number?");
+                    System.out.println("y / n");
+                    yesNo2 = numInput.next().charAt(0);
+
+                    if (yesNo2 == 'y') {
+                        System.out.println("Neat, what is the next number: ");
+                        num = numInput.nextInt();
+                        numsArray.add(num);
+                    } else if (yesNo2 == 'n') {
+                        moreNums = false;
+
+                        for (i = 1; i < numsArray.size(); ++i) {
+                            sum /= numsArray.get(i);
+                        }
+
+                        System.out.println(sum + " is your answer :D");
+
+                        System.out.println("Would you like to some more division?");
+                        System.out.println("y/n");
+                        yesNo2 = numInput.next().charAt(0);
+
+                        if (yesNo2 == 'y'){
+                            numsArray.clear();
+                            sum = 0;
+                        } else if (yesNo2 == 'n'){
+                            numsArray.clear();
+                            sum = 0;
+                            divTrue = false;
+                        }
+                    }
+                }
+            }
+        } catch(InputMismatchException im){System.out.println("And that sir and or madam, is not a number. Do it again.");}
 
     }
 
-}
+    }

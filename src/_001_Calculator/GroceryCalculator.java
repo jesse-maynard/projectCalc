@@ -1,20 +1,25 @@
 package _001_Calculator;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
  * Created by jessemaynard on 10/11/16.
  */
-public class GroceryCalculator extends Calculator {
 
-    int i;
-    Double groceryCost, stateTax = .06, subTotal, grandTotal;
-    boolean grocTime = true;
-    char yesNo3;
+public class GroceryCalculator{
 
-    Scanner priceInput = new Scanner(System.in);
-    GroceryCalculator() {
+    static void grocCalc(){
+        //Variables
+        int i;
+        Double groceryCost, stateTax = .06, subTotal = 0.00, grandTotal = 0.00;
+        boolean grocTime = true;
+        char yesNo3;
+        //Scanner
+        Scanner priceInput = new Scanner(System.in);
+
+        ArrayList<Double> grocArray = new ArrayList<>();
 
         try {
             System.out.println("So you're buying groceries. Time to adjust for TAXES!");
@@ -49,17 +54,15 @@ public class GroceryCalculator extends Calculator {
 
                     if (yesNo3 == 'y') {
                         grocArray.clear();
-                        subTotal = 0.00;
-                        grandTotal = 0.00;
                     }
                     if (yesNo3 == 'n') {
                         grocArray.clear();
-                        subTotal = 0.00;
-                        grandTotal = 0.00;
                         grocTime = false;
                     }
                 }
             }
         } catch(InputMismatchException im){System.out.println("And that sir and or madam, is not a number. Do it again.");}
+
     }
 }
+
