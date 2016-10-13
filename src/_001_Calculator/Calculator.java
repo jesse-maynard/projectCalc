@@ -10,7 +10,8 @@ import java.util.Scanner;
 
 public class Calculator{
 
-    ArrayList<Integer> numsArray = new ArrayList<>();
+    ArrayList<Double> numsArray = new ArrayList<>();
+    ArrayList<Double> answersArray = new ArrayList<>();
 
     public void calc() {
 
@@ -48,11 +49,12 @@ public class Calculator{
         }
     }
 
-    public void addition(ArrayList<Integer> numsArray){
+    public void addition(ArrayList<Double> numsArray){
 
         //Variables
         boolean addTrue = true;
-        int num, sum = 0, i;
+        int i;
+        double num, sum = 0;
         char yesNo2;
 
         //Scanner
@@ -92,6 +94,7 @@ public class Calculator{
                         }
 
                         System.out.println(sum + " is your answer :D");
+                        answersArray.add(sum);
                         System.out.println("Want to do some MORE addition?");
                         System.out.println("y / n");
                         yesNo2 = numInput.next().charAt(0);
@@ -110,9 +113,10 @@ public class Calculator{
         } catch(InputMismatchException im){System.out.println("And that sir and or madam, is not a number. Do it again.");}
     }
 
-    public void subtraction(ArrayList<Integer> numsArray){
+    public void subtraction(ArrayList<Double> numsArray){
         //Variables
-        int num, sum = 0, i;
+        int i;
+        double num, sum = 0;
         char yesNo2;
         boolean subTrue = true;
         //Scanner
@@ -149,7 +153,7 @@ public class Calculator{
                         }
 
                         System.out.println(sum + " is your answer :D");
-
+                        answersArray.add(sum);
                         System.out.println("Wanna subtract some more numbers?");
                         System.out.println("y/n");
                         yesNo2 = numInput.next().charAt(0);
@@ -168,9 +172,10 @@ public class Calculator{
         } catch(InputMismatchException im){System.out.println("And that sir and or madam, is not a number. Do it again.");}
     }
 
-    public void multiplication(ArrayList<Integer> numsArray){
+    public void multiplication(ArrayList<Double> numsArray){
         //Variables
-        int num, sum = 1, i;
+        int i;
+        double num, sum = 1;
         char yesNo2;
         boolean multTrue = true;
         //Scanner
@@ -206,7 +211,7 @@ public class Calculator{
                         }
 
                         System.out.println(sum + " is your answer :D");
-
+                        answersArray.add(sum);
                         System.out.println("Would you like to get another product?");
                         System.out.println("y/n");
                         yesNo2 = numInput.next().charAt(0);
@@ -225,10 +230,11 @@ public class Calculator{
         } catch(InputMismatchException im){System.out.println("And that sir and or madam, is not a number. Do it again.");}
     }
 
-    public void division(ArrayList<Integer> numsArray){
+    public void division(ArrayList<Double> numsArray){
         //Variables
-        int num, i;
+        int i;
         char yesNo2;
+        double num;
         boolean divTrue = true;
         //Scanner
         Scanner numInput = new Scanner(System.in);
@@ -265,7 +271,7 @@ public class Calculator{
                         }
 
                         System.out.println(sum + " is your answer :D");
-
+                        answersArray.add(sum);
                         System.out.println("Would you like to some more division?");
                         System.out.println("y/n");
                         yesNo2 = numInput.next().charAt(0);
